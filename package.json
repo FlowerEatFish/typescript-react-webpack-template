@@ -9,11 +9,14 @@
   "private": true,
   "scripts": {
     "start:dev": "cross-env NODE_ENV=development webpack-dev-server",
-    "build:prod": "cross-env NODE_ENV=production webpack"
+    "build:prod": "cross-env NODE_ENV=production webpack",
+    "eslint": "eslint . -f stylish --ext .js --ext .ts --ext .tsx",
+    "eslint:fix": "eslint . -f stylish --ext .js --ext .ts --ext .tsx --fix"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn run eslint"
     }
   },
   "lint-staged": {
@@ -31,6 +34,15 @@
     "@types/react": "^16.9.3",
     "@types/react-dom": "^16.9.1",
     "@types/react-router-dom": "^5.1.0",
+    "@typescript-eslint/eslint-plugin": "^2.3.0",
+    "@typescript-eslint/parser": "^2.3.0",
+    "eslint": "^6.4.0",
+    "eslint-config-prettier": "^6.3.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^2.0.1",
     "copy-webpack-plugin": "^5.0.4",
     "cross-env": "^6.0.0",
     "husky": "^3.0.5",
