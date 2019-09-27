@@ -11,7 +11,15 @@
     "start:dev": "cross-env NODE_ENV=development webpack-dev-server",
     "build:prod": "cross-env NODE_ENV=production webpack"
   },
+  "dependencies": {
+    "react": "^16.10.0",
+    "react-dom": "^16.10.0",
+    "react-router-dom": "^5.1.1"
+  },
   "devDependencies": {
+    "@types/react": "^16.9.3",
+    "@types/react-dom": "^16.9.1",
+    "@types/react-router-dom": "^5.1.0",
     "copy-webpack-plugin": "^5.0.4",
     "cross-env": "^6.0.0",
     "ts-loader": "^6.1.2",
