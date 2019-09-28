@@ -9,6 +9,7 @@
   "private": true,
   "scripts": {
     "start:dev": "cross-env NODE_ENV=development webpack-dev-server",
+    "build:css": "tailwind build ./tailwind.css -o ./src/tailwind.css",
     "build:prod": "cross-env NODE_ENV=production webpack",
     "eslint": "eslint . -f stylish --ext .js --ext .ts --ext .tsx",
     "eslint:fix": "eslint . -f stylish --ext .js --ext .ts --ext .tsx --fix"
@@ -28,7 +29,8 @@
   "dependencies": {
     "react": "^16.10.0",
     "react-dom": "^16.10.0",
-    "react-router-dom": "^5.1.1"
+    "react-router-dom": "^5.1.1",
+    "tailwindcss": "^1.1.2"
   },
   "devDependencies": {
     "@types/react": "^16.9.3",
@@ -38,6 +40,7 @@
     "@typescript-eslint/parser": "^2.3.0",
     "copy-webpack-plugin": "^5.0.4",
     "cross-env": "^6.0.0",
+    "css-loader": "^3.2.0",
     "eslint": "^6.4.0",
     "eslint-config-prettier": "^6.3.0",
     "eslint-plugin-import": "^2.18.2",
@@ -45,9 +48,14 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-react-hooks": "^2.0.1",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "glob": "^7.1.4",
     "husky": "^3.0.5",
     "lint-staged": "^9.4.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
     "prettier": "^1.18.2",
+    "purgecss-webpack-plugin": "^1.6.0",
     "ts-loader": "^6.1.2",
     "typescript": "^3.6.3",
     "uglifyjs-webpack-plugin": "^2.2.0",

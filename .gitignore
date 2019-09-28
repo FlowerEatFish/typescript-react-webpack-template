@@ -1,5 +1,6 @@
 # This project
 dist/
+src/tailwind.css
 package-lock.json
 
 # Logs

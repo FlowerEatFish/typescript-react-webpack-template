@@ -1,6 +1,10 @@
 const path = require("path");
+const glob = require("glob");
 const { BannerPlugin } = require("webpack");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const PurgeCssPlugin = require("purgecss-webpack-plugin");
 const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
 const packageInfo = require("./package.json");
 
@@ -12,7 +16,8 @@ const NODE_ENV = {
 const PATH = {
   NODE_MODULES: path.join(__dirname, "node_modules"),
   PUBLIC: path.join(__dirname, "public"),
-  DIST: path.join(__dirname, "dist")
+  DIST: path.join(__dirname, "dist"),
+  SRC: path.join(__dirname, "src")
 };
 
 const commonConfig = {
@@ -32,6 +37,10 @@ const commonConfig = {
         test: /\.tsx?$/,
         use: "ts-loader",
         exclude: /node_modules/
+      },
+      {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader"]
       }
     ]
   },
@@ -42,6 +51,9 @@ const commonConfig = {
     new BannerPlugin({
       banner: `Repository: ${packageInfo.name} | Version: ${packageInfo.version} | Author: ${packageInfo.author} | License: ${packageInfo.license}`
     }),
+    new MiniCssExtractPlugin({
+      filename: "[name].css"
+    }),
     new CopyWebpackPlugin([
       {
         from: path.join(PATH.PUBLIC, "**", "*"),
@@ -50,7 +62,15 @@ const commonConfig = {
           return path.relative(PATH.PUBLIC, absolutePath);
         }
       }
-    ])
+    ]),
+    new OptimizeCssAssetsPlugin({
+      cssProcessorPluginOptions: {
+        preset: ["default", { discardComments: { removeAll: true } }]
+      }
+    }),
+    new PurgeCssPlugin({
+      paths: glob.sync(path.join(PATH.SRC, "**", "*"), { nodir: true })
+    })
   ],
   devServer: {
     contentBase: PATH.DIST,
