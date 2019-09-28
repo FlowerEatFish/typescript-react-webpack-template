@@ -1,6 +1,7 @@
 const path = require("path");
 const { BannerPlugin } = require("webpack");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
 const packageInfo = require("./package.json");
 
 const PORT = process.env.PORT || 3000;
@@ -60,7 +61,19 @@ const commonConfig = {
   }
 };
 
-const prodConfig = {};
+const prodConfig = {
+  optimization: {
+    minimizer: [
+      new UglifyJSPlugin({
+        uglifyOptions: {
+          compress: {
+            drop_console: true
+          }
+        }
+      })
+    ]
+  }
+};
 
 const runBeforeWebpack = () => {
   switch (process.env.NODE_ENV) {
