@@ -87,6 +87,7 @@ const prodConfig = {
       new UglifyJSPlugin({
         uglifyOptions: {
           compress: {
+            // eslint-disable-next-line @typescript-eslint/camelcase
             drop_console: true
           }
         }

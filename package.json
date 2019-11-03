@@ -11,8 +11,8 @@
     "start:dev": "cross-env NODE_ENV=development webpack-dev-server",
     "build:css": "trash ./src/tailwind.css && tailwind build ./tailwind.css -o ./src/tailwind.css",
     "build:prod": "trash ./dist && cross-env NODE_ENV=production webpack",
-    "eslint": "eslint . -f stylish --ext .js --ext .ts --ext .tsx",
-    "eslint:fix": "eslint . -f stylish --ext .js --ext .ts --ext .tsx --fix"
+    "eslint": "eslint . -f stylish --ext .js,.jsx,.ts,.tsx",
+    "eslint:fix": "eslint . -f stylish --ext .js,.jsx,.ts,.tsx --fix"
   },
   "husky": {
     "hooks": {
