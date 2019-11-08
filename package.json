@@ -14,18 +14,6 @@
     "eslint": "eslint . -f stylish --ext .js,.jsx,.ts,.tsx",
     "eslint:fix": "eslint . -f stylish --ext .js,.jsx,.ts,.tsx --fix"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "yarn run eslint"
-    }
-  },
-  "lint-staged": {
-    "*.{html,json,js.jsx,ts,tsx,css,scss}": [
-      "prettier --write",
-      "git add"
-    ]
-  },
   "dependencies": {
     "react": "^16.10.0",
     "react-dom": "^16.10.0",
