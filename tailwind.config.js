@@ -1,4 +1,8 @@
 const styleConfig = {
+  future: {
+    removeDeprecatedGapUtilities: true,
+    purgeLayersByDefault: true,
+  },
   theme: {
     extend: {},
   },
