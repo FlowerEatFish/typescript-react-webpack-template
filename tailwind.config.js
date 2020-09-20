@@ -1,9 +1,9 @@
 const styleConfig = {
   theme: {
-    extend: {}
+    extend: {},
   },
   variants: {},
-  plugins: []
+  plugins: [],
 };
 
 module.exports = styleConfig;

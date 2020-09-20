@@ -11,74 +11,76 @@ const packageInfo = require("./package.json");
 const PORT = process.env.PORT || 3000;
 const NODE_ENV = {
   DEVELOPMENT: "development",
-  PRODUCTION: "production"
+  PRODUCTION: "production",
 };
 const PATH = {
   NODE_MODULES: path.join(__dirname, "node_modules"),
   PUBLIC: path.join(__dirname, "public"),
   DIST: path.join(__dirname, "dist"),
-  SRC: path.join(__dirname, "src")
+  SRC: path.join(__dirname, "src"),
 };
 
 const commonConfig = {
   mode: process.env.NODE_ENV,
   entry: {
-    bundle: "./src/app.tsx"
+    bundle: "./src/app.tsx",
   },
   output: {
     path: PATH.DIST,
     filename: "[name].js",
     library: "bundle",
-    libraryTarget: "umd"
+    libraryTarget: "umd",
   },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
         use: "ts-loader",
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader"]
-      }
-    ]
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
+      },
+    ],
   },
   resolve: {
-    extensions: [".tsx", ".ts", ".js"]
+    extensions: [".tsx", ".ts", ".js"],
   },
   plugins: [
     new BannerPlugin({
-      banner: `Repository: ${packageInfo.name} | Version: ${packageInfo.version} | Author: ${packageInfo.author} | License: ${packageInfo.license}`
+      banner: `Repository: ${packageInfo.name} | Version: ${packageInfo.version} | Author: ${packageInfo.author} | License: ${packageInfo.license}`,
     }),
     new MiniCssExtractPlugin({
-      filename: "[name].css"
+      filename: "[name].css",
     }),
-    new CopyWebpackPlugin([
-      {
-        from: path.join(PATH.PUBLIC, "**", "*"),
-        to: path.join(PATH.DIST),
-        transformPath(targetPath, absolutePath) {
-          return path.relative(PATH.PUBLIC, absolutePath);
-        }
-      }
-    ]),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.join(PATH.PUBLIC, "**", "*"),
+          to: path.join(PATH.DIST),
+          transformPath(targetPath, absolutePath) {
+            return path.relative(PATH.PUBLIC, absolutePath);
+          },
+        },
+      ],
+    }),
     new OptimizeCssAssetsPlugin({
       cssProcessorPluginOptions: {
-        preset: ["default", { discardComments: { removeAll: true } }]
-      }
+        preset: ["default", { discardComments: { removeAll: true } }],
+      },
     }),
     new PurgeCssPlugin({
-      paths: glob.sync(path.join(PATH.SRC, "**", "*"), { nodir: true })
-    })
+      paths: glob.sync(path.join(PATH.SRC, "**", "*"), { nodir: true }),
+    }),
   ],
   devServer: {
     contentBase: PATH.DIST,
     historyApiFallback: true,
     compress: true,
     open: true,
-    port: PORT
-  }
+    port: PORT,
+  },
 };
 
 const prodConfig = {
@@ -87,13 +89,12 @@ const prodConfig = {
       new UglifyJSPlugin({
         uglifyOptions: {
           compress: {
-            // eslint-disable-next-line @typescript-eslint/camelcase
-            drop_console: true
-          }
-        }
-      })
-    ]
-  }
+            drop_console: true,
+          },
+        },
+      }),
+    ],
+  },
 };
 
 const runBeforeWebpack = () => {

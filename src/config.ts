@@ -1,3 +1,3 @@
 export default {
-  projectTitle: "UNDEFINED TITLE"
+  projectTitle: "UNDEFINED TITLE",
 };
