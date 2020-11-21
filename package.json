@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "A TypeScript and React template with Webpack bundler",
   "main": "./src/app.tsx",
-  "repository": "git@github.com:FlowerEatFish/typescript-react-webpack-template.git",
+  "repository": "git@github.com:FlowerEatsFish/typescript-react-webpack-template.git",
   "author": "Eating-Fish Flower <flower.eating.fish@gmail.com>",
   "license": "MIT",
   "private": true,
